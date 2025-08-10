@@ -1,456 +1,492 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Metro City — Portale Istituzionale</title>
-  <meta name="description" content="Portale istituzionale della Città di Metro City: notizie, servizi, bandi e trasparenza." />
-  <meta property="og:title" content="Metro City — Portale Istituzionale" />
-  <meta property="og:description" content="Notizie, servizi online, bandi e trasparenza di Metro City." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="/og-image.png" />
-  <meta property="og:locale" content="it_IT" />
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <title>Governo MetroCity</title>
+  <meta name="description" content="Sito istituzionale del Governo MetroCity" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      /* Tavolozza viola */
-      --violet-800:#4B2E83; /* principale */
-      --violet-700:#5A35A3;
-      --violet-600:#6B3FC7;
-      --violet-500:#7C55D9;
-      --violet-200:#D9CCFF;
-      --ink:#0C0D10;
-      --ink-2:#1A1B22;
-      --bg:#0F1016;
-      --bg-2:#12131B;
-      --paper:#FFFFFF;
-      --muted:#8D91A3;
-      --line:#222433;
-      --radius:14px;
-      --shadow:0 10px 30px rgba(0,0,0,.25);
-      --container:1200px;
+      --violet:#5B2B9D; /* header/footer */
+      --violet-700:#4A2184;
+      --bg:#ffffff; /* body */
+      --box:#E9E9ED; /* card background */
+      --text:#1b1b1f;
+      --muted:#6b7280;
+      --link:#3b82f6;
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.08);
+      --shadow-sm:0 6px 16px rgba(0,0,0,.06);
+      --maxw:1100px;
     }
-    *,*::before,*::after{box-sizing:border-box}
+    *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      color:#EDEEF4;
-      background:linear-gradient(180deg,var(--bg),var(--bg-2));
-      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale
+      margin:0; font-family:"Titillium Web", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text); background:var(--bg);
+      line-height:1.35; 
     }
-    a{color:#EDEEF4;text-decoration:none}
-    a:hover{text-decoration:underline;text-decoration-color:var(--violet-500)}
-    .container{width:min(100% - 32px, var(--container)); margin-inline:auto}
-    .grid{display:grid;gap:22px}
-    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
-    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
-    .grid.cols-4{grid-template-columns:repeat(4,1fr)}
-    @media (max-width: 960px){.grid.cols-2,.grid.cols-3,.grid.cols-4{grid-template-columns:1fr}}
-    /* Accessibilità */
-    .skip{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
-    .skip:focus{left:16px;top:16px;background:#1b1c26;border:1px solid var(--violet-500);padding:8px 12px;border-radius:10px}
+    a{color:var(--link); text-decoration:none}
+    a:hover{text-decoration:underline}
 
-    /* Header istituzionale */
-    header.top{
-      position:sticky;top:0;z-index:50;
-      background:rgba(10,11,16,.7);
-      backdrop-filter:saturate(130%) blur(8px);
-      border-bottom:1px solid #161825;
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50;
+      background:linear-gradient(180deg, var(--violet) 0%, var(--violet-700) 100%);
+      color:#fff; box-shadow:var(--shadow);
     }
-    .bar{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-    .brand{display:flex;align-items:center;gap:12px}
-    .crest{
-      width:40px;height:40px;border-radius:50%;
-      background: radial-gradient(120% 120% at 30% 20%, var(--violet-600), var(--violet-800));
-      display:grid;place-items:center;box-shadow:0 0 0 1px rgba(124,85,217,.35),0 6px 16px rgba(0,0,0,.35)
-    }
-    .crest svg{width:22px;height:22px;color:white;opacity:.95}
-    .brand .title{font-weight:700;letter-spacing:.2px}
-    .brand .title small{display:block;color:var(--violet-200);font-weight:600;letter-spacing:.08em}
-    nav.links{display:flex;gap:18px;align-items:center}
-    nav.links a{opacity:.92}
-    .search-btn,.menu-btn{
-      display:inline-flex;align-items:center;gap:8px;
-      border:1px solid #23263A;border-radius:10px;background:#16192A;color:#EDEEF4;
-      padding:8px 10px
-    }
-    .menu-btn{display:none}
-    @media (max-width:980px){nav.links{display:none}.menu-btn{display:inline-flex}}
+    .topbar{max-width:var(--maxw); margin:0 auto; padding:14px 20px; display:flex; gap:16px; align-items:center;}
+    .brand{display:flex; flex-direction:column}
+    .brand h1{margin:0; font-size:1.6rem; letter-spacing:.3px}
+    .brand span{opacity:.9}
 
-    /* Mega search panel */
-    .search-panel{
-      display:none; position:absolute; left:0; right:0;
-      background:#0F111B; border-top:1px solid #1C2033; box-shadow:0 14px 34px rgba(0,0,0,.45)
+    nav{margin-left:auto; display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+    .menu{display:flex; gap:6px; flex-wrap:wrap}
+    .menu a{color:#fff; padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.2)}
+    .menu a.active,.menu a:hover{background:rgba(255,255,255,.14)}
+
+    /* Search */
+    .search{position:relative}
+    .search input{
+      padding:10px 36px 10px 12px; border-radius:999px; border:none; outline:none; width:220px;
+      box-shadow:var(--shadow-sm); background:rgba(255,255,255,.95); color:#111;
     }
-    .search-panel.open{display:block}
-    .search-wrap{padding:18px 0; display:grid; gap:12px}
-    .search-input{
-      width:100%; padding:12px 14px; border-radius:12px; border:1px solid #23263A;
-      background:#121427; color:#EDEEF4; font-size:1rem
+    .search button{
+      position:absolute; right:4px; top:50%; transform:translateY(-50%);
+      border:none; background:transparent; color:#333; cursor:pointer; padding:6px 8px; border-radius:8px;
     }
 
-    /* Hero con evidenza */
-    .hero{
-      background:
-        radial-gradient(900px 500px at 15% -200px, rgba(124,85,217,.18), transparent 60%),
-        radial-gradient(900px 500px at 85% -200px, rgba(106,63,199,.18), transparent 60%);
-      padding: 54px 0 28px;
-      border-bottom:1px solid #171A29;
-    }
-    .eyebrow{color:var(--violet-200);text-transform:uppercase;font-size:.85rem;letter-spacing:.12em;font-weight:600}
-    h1{font-size:clamp(1.9rem,4vw,2.6rem);line-height:1.2;margin:6px 0 12px}
-    .lead{color:#B7BAD0;max-width:70ch}
+    /* Visually hidden label */
+    .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
 
-    /* Cards & lists */
-    .card{
-      background:rgba(255,255,255,.02); border:1px solid #1E2134; border-radius:var(--radius);
-      padding:18px; transition:transform .2s ease, border-color .2s ease, background .2s ease
-    }
-    .card:hover{transform:translateY(-2px); border-color:rgba(124,85,217,.35); background:rgba(124,85,217,.06)}
-    .card h3{margin:6px 0 8px; font-size:1.1rem}
-    .muted{color:#9CA0B4}
-    .chip{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid #2A2D43;border-radius:999px;background:rgba(255,255,255,.02);font-size:.9rem}
-    .chip--violet{border-color:rgba(124,85,217,.45)}
-    .cta{
-      display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;
-      border:1px solid rgba(124,85,217,.75); background:linear-gradient(180deg,var(--violet-600),var(--violet-800));
-      color:#fff; font-weight:600; box-shadow:var(--shadow)
-    }
-    .section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px}
-    .section-head h2{margin:0;font-size:1.5rem}
+    /* Lang switch */
+    .lang-switch{display:flex; gap:6px; align-items:center; margin-left:6px}
+    .lang-switch button{background:rgba(255,255,255,.16); color:#fff; border:1px solid rgba(255,255,255,.25); padding:8px 10px; border-radius:10px; cursor:pointer}
+    .lang-switch button.active{background:#fff; color:var(--violet-700)}
 
-    /* Liste notizie */
-    .news-list{display:grid;gap:14px}
-    .news-item{display:grid;gap:6px;padding:14px;border:1px solid #1E2134;border-radius:12px;background:rgba(255,255,255,.015)}
-    .news-item strong{font-weight:600}
-    .news-item time{color:#9CA0B4;font-size:.9rem}
-
-    /* Sezioni */
-    section{padding:36px 0}
-    section.alt{background:linear-gradient(180deg,#0F1016,#12131B)}
-    .cols{display:grid;gap:22px;grid-template-columns:2fr 1fr}
-    @media (max-width: 980px){.cols{grid-template-columns:1fr}}
-
-    /* Footer istituzionale */
-    footer{
-      margin-top:24px;padding:40px 0 56px;background:#0D0E15;border-top:1px solid #181A2B
+    /* Hero */
+    .hero{background:
+      radial-gradient(1200px 300px at 50% -120px, rgba(255,255,255,.18), transparent 60%),
+      linear-gradient(0deg, #fafafa, #ffffff);
+      border-bottom:1px solid #efeff4;
     }
-    .foot-grid{display:grid;gap:22px;grid-template-columns:2fr 1fr 1fr}
-    @media (max-width: 900px){.foot-grid{grid-template-columns:1fr}}
-    .foot h4{margin:0 0 8px;color:var(--violet-200);font-size:1rem}
-    .list{list-style:none;padding:0;margin:0;display:grid;gap:8px}
-    .legal{margin-top:18px;color:#9CA0B4;font-size:.9rem}
-    .ext{opacity:.95}
-    .ext:hover{text-decoration:underline;text-decoration-color:var(--violet-500)}
+    .hero-inner{max-width:var(--maxw); margin:0 auto; padding:28px 20px 6px}
+    .breadcrumbs{color:var(--muted); font-size:.95rem}
+    .hero h2{margin:8px 0 6px; font-size:2rem}
+    .hero p{margin:0; color:#4b5563}
+
+    /* Layout */
+    main{max-width:var(--maxw); margin:0 auto; padding:22px 20px 56px}
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px}
+    .col-8{grid-column:span 8}
+    .col-4{grid-column:span 4}
+    .col-12{grid-column:span 12}
+
+    /* Cards */
+    .card{background:var(--box); border-radius:var(--radius); box-shadow:var(--shadow-sm); padding:18px}
+    .card h3{margin:0 0 8px}
+    .muted{color:var(--muted)}
+    .btn{display:inline-block; padding:10px 14px; border-radius:12px; background:var(--violet); color:#fff; border:0; box-shadow:var(--shadow-sm)}
+    .btn:hover{filter:brightness(1.05)}
+
+    /* Sections visibility */
+    section[data-route]{display:none}
+    section[data-route].active{display:block}
+
+    /* Lists */
+    .list{display:grid; gap:12px}
+    .ministeri{display:grid; grid-template-columns:repeat(auto-fill, minmax(240px,1fr)); gap:12px}
+    .ministero{background:var(--box); border-radius:var(--radius); padding:14px; box-shadow:var(--shadow-sm)}
+    .ministero h4{margin:2px 0 6px}
+
+    /* Footer */
+    footer{background:var(--violet-700); color:#f3f4f6; padding:18px 20px; margin-top:32px}
+    .footer-inner{max-width:var(--maxw); margin:0 auto; display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between}
+    .footer-inner a{color:#fff}
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .col-8{grid-column:span 12}
+      .col-4{grid-column:span 12}
+      nav{width:100%}
+      .menu{flex:1 1 auto}
+      .search input{width:100%}
+    }
   </style>
 </head>
 <body>
-  <a class="skip" href="#contenuto">Salta al contenuto principale</a>
+  <header>
+    <div class="topbar" role="navigation" aria-label="Barra superiore">
+      <div class="brand" aria-label="Intestazione sito">
+        <h1 id="site-title" data-i18n="site.title">Governo MetroCity</h1>
+        <span data-i18n="site.subtitle">Presidenza del Consiglio dei Ministri</span>
+      </div>
 
-  <!-- Header -->
-  <header class="top" role="banner">
-    <div class="container bar">
-      <a class="brand" href="#" aria-label="Metro City - Portale Istituzionale">
-        <span class="crest" aria-hidden="true">
-          <!-- Mini stemma MC -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-            <path d="M4 10l8-6 8 6v6c0 4-3 6-8 8-5-2-8-4-8-8v-6z"/>
-            <path d="M8 12h8M12 8v8"/>
-          </svg>
-        </span>
-        <span class="title">Metro City <small>Portale Istituzionale</small></span>
-      </a>
-
-      <nav class="links" aria-label="Navigazione principale">
-        <a href="#in-evidenza">In evidenza</a>
-        <a href="#notizie">Notizie</a>
-        <a href="#comunicati">Comunicati</a>
-        <a href="#bandi">Bandi</a>
-        <a href="#servizi">Servizi</a>
-        <a href="#trasparenza">Trasparenza</a>
-        <button class="search-btn" id="openSearch" aria-expanded="false" aria-controls="search-panel">Cerca</button>
+      <nav aria-label="Menu principale">
+        <div class="menu" role="menubar">
+          <a href="#/" role="menuitem" data-link data-i18n="nav.home" class="active">Home</a>
+          <a href="#/presidente" role="menuitem" data-link data-i18n="nav.president">Presidente</a>
+          <a href="#/governo" role="menuitem" data-link data-i18n="nav.government">Il Governo</a>
+          <a href="#/feed" role="menuitem" data-link>Feed</a>
+        </div>
       </nav>
 
-      <button class="menu-btn" id="openMenu" aria-expanded="false" aria-controls="menu-panel">Menu</button>
-    </div>
-
-    <!-- Search panel -->
-    <div id="search-panel" class="search-panel" aria-hidden="true">
-      <div class="container search-wrap">
-        <label for="site-search" class="visually-hidden">Cerca nel sito</label>
-        <input id="site-search" class="search-input" type="search" placeholder="Cerca in Metro City…" />
-        <div class="grid cols-4">
-          <a class="chip chip--violet" href="#servizi">Servizi online</a>
-          <a class="chip" href="#bandi">Bandi e avvisi</a>
-          <a class="chip" href="#notizie">Ultime notizie</a>
-          <a class="chip" href="#trasparenza">Amministrazione trasparente</a>
-        </div>
+      <div class="search" role="search">
+        <label class="sr-only" for="q">Cerca</label>
+        <input id="q" type="search" placeholder="Cerca..." data-i18n-placeholder="search.placeholder" />
+        <button aria-label="Cerca" title="Cerca" id="searchBtn">🔎</button>
       </div>
-    </div>
 
-    <!-- Menu mobile -->
-    <div id="menu-panel" class="search-panel" aria-hidden="true">
-      <div class="container search-wrap">
-        <nav class="grid" aria-label="Menu mobile">
-          <a href="#in-evidenza">In evidenza</a>
-          <a href="#notizie">Notizie</a>
-          <a href="#comunicati">Comunicati</a>
-          <a href="#bandi">Bandi</a>
-          <a href="#servizi">Servizi</a>
-          <a href="#trasparenza">Trasparenza</a>
-          <a class="ext" href="https://metrocity.life" target="_blank" rel="noopener">metrocity.life</a>
-        </nav>
+      <div class="lang-switch" aria-label="Cambio lingua">
+        <button id="itBtn" class="active" data-lang="it" aria-pressed="true">IT</button>
+        <button id="enBtn" data-lang="en" aria-pressed="false">EN</button>
       </div>
     </div>
   </header>
 
-  <main id="contenuto">
-    <!-- Hero -->
-    <section class="hero">
-      <div class="container">
-        <div class="eyebrow">Portale ufficiale — Metro City</div>
-        <h1>Informazioni, servizi e opportunità per cittadini e imprese.</h1>
-        <p class="lead">Aggiornamenti istituzionali, bandi, servizi digitali e documenti in trasparenza. Tutto in un unico luogo, con un linguaggio chiaro e verificabile.</p>
-        <div class="grid cols-3" style="margin-top:18px">
-          <a class="card" href="#in-evidenza">
-            <strong>In evidenza</strong>
-            <p class="muted">Le comunicazioni più importanti del momento.</p>
-          </a>
-          <a class="card" href="#servizi">
-            <strong>Servizi online</strong>
-            <p class="muted">Sportelli digitali per richieste e pagamenti.</p>
-          </a>
-          <a class="card" href="#trasparenza">
-            <strong>Trasparenza</strong>
-            <p class="muted">Atti, documenti e dati pubblici.</p>
-          </a>
+  <div class="hero" aria-labelledby="hero-title">
+    <div class="hero-inner">
+      <div class="breadcrumbs" id="breadcrumbs">Home</div>
+      <h2 id="hero-title" data-i18n="hero.title">Benvenuti nel portale istituzionale</h2>
+      <p data-i18n="hero.lead">Informazioni ufficiali su Presidenza, Ministeri e attività pubbliche della città.</p>
+    </div>
+  </div>
+
+  <main id="app" tabindex="-1">
+
+    <!-- HOME -->
+    <section data-route="home" class="active" aria-label="Home">
+      <div class="grid">
+        <div class="col-8">
+          <article class="card" id="home-pres-preview">
+            <h3 data-i18n="home.presidentPreview.title">Presidente del Consiglio dei Ministri</h3>
+            <p class="muted" data-i18n="home.presidentPreview.lead">Conosci la visione e le priorità del Presidente del Consiglio, Marco Lorsi.</p>
+            <p data-i18n="home.presidentPreview.text">Nominato a seguito delle consultazioni, il Presidente guida l'azione dell'Esecutivo, coordina i Ministri e rappresenta l'indirizzo politico generale del Governo.</p>
+            <a class="btn" href="#/presidente" data-i18n="cta.readMore">Scopri di più</a>
+          </article>
+
+          <article class="card" id="home-gov-preview">
+            <h3 data-i18n="home.governmentPreview.title">Il Governo</h3>
+            <p class="muted" data-i18n="home.governmentPreview.lead">Ministeri e funzioni principali.</p>
+            <div class="ministeri" id="gov-preview-list"><!-- filled by JS --></div>
+            <div style="margin-top:10px"><a class="btn" href="#/governo" data-i18n="cta.viewAll">Vedi tutti</a></div>
+          </article>
         </div>
+
+        <aside class="col-4">
+          <section class="card" id="home-feed-preview">
+            <h3>Feed</h3>
+            <ul class="list" id="feed-preview-list"><!-- filled by JS --></ul>
+            <a class="btn" href="#/feed" data-i18n="cta.openFeed">Apri feed</a>
+          </section>
+        </aside>
       </div>
     </section>
 
-    <!-- In evidenza -->
-    <section id="in-evidenza" class="alt">
-      <div class="container">
-        <div class="section-head">
-          <h2>In evidenza</h2>
-          <a class="ext" href="#notizie">Tutte le notizie</a>
-        </div>
-        <div class="grid cols-3">
-          <article class="card">
-            <span class="chip chip--violet">Avviso</span>
-            <h3>Nuove linee guida per servizi digitali</h3>
-            <p class="muted">Pubblicate le indicazioni operative per l’accesso ai servizi online.</p>
-          </article>
-          <article class="card">
-            <span class="chip chip--violet">Comunicazione</span>
-            <h3>Calendario interventi su infrastrutture</h3>
-            <p class="muted">Programmazione lavori e possibili interruzioni programmate.</p>
-          </article>
-          <article class="card">
-            <span class="chip chip--violet">Bando</span>
-            <h3>Sostegno a progetti d’impresa</h3>
-            <p class="muted">Aperta la presentazione delle domande per il nuovo avviso.</p>
-          </article>
-        </div>
-      </div>
+    <!-- PRESIDENTE -->
+    <section data-route="presidente" aria-label="Presidente del Consiglio dei Ministri">
+      <article class="card">
+        <h3 data-i18n="president.title">Presidente del Consiglio dei Ministri</h3>
+        <p class="muted" data-i18n="president.name">Marco Lorsi</p>
+        <p data-i18n="president.story">
+          Nato e cresciuto a MetroCity, Marco Lorsi ha maturato esperienza in amministrazione pubblica e coordinamento di progetti strategici per la città. Dopo un periodo di consultazioni con le forze civiche e istituzionali, ha ricevuto l'incarico di formare il Governo. Le sue priorità includono modernizzazione amministrativa, sicurezza urbana, innovazione sostenibile e dialogo costante con i cittadini.
+        </p>
+        <p class="muted" data-i18n="president.note">Questa è una breve biografia di riferimento; le informazioni ufficiali sono pubblicate nei comunicati e nelle note stampa del Consiglio.</p>
+      </article>
     </section>
 
-    <!-- Colonne Notizie / Comunicati -->
-    <section class="alt">
-      <div class="container cols">
-        <!-- Notizie -->
-        <div id="notizie">
-          <div class="section-head">
-            <h2>Notizie</h2>
-            <a class="ext" href="#notizie">Archivio</a>
-          </div>
-          <div class="news-list" id="news-feed" data-source="/data/news.json" aria-live="polite">
-            <article class="news-item">
-              <strong>In allestimento</strong>
-              <p class="muted">Le notizie saranno pubblicate a breve.</p>
-              <time datetime="2025-08-10">10 agosto 2025 · Metro City</time>
-            </article>
-          </div>
-        </div>
-
-        <!-- Comunicati -->
-        <div id="comunicati">
-          <div class="section-head">
-            <h2>Comunicati</h2>
-            <a class="ext" href="#comunicati">Archivio</a>
-          </div>
-          <div class="news-list" id="pr-feed" data-source="/data/press.json" aria-live="polite">
-            <article class="news-item">
-              <strong>In allestimento</strong>
-              <p class="muted">I comunicati stampa saranno pubblicati a breve.</p>
-              <time datetime="2025-08-10">10 agosto 2025 · Metro City</time>
-            </article>
-          </div>
-        </div>
-      </div>
+    <!-- GOVERNO -->
+    <section data-route="governo" aria-label="Il Governo">
+      <article class="card">
+        <h3 data-i18n="government.title">Struttura del Governo</h3>
+        <p class="muted" data-i18n="government.lead">Di seguito i ministeri principali.</p>
+        <div class="ministeri" id="ministeri-list"><!-- filled by JS --></div>
+      </article>
     </section>
 
-    <!-- Bandi e avvisi -->
-    <section id="bandi">
-      <div class="container">
-        <div class="section-head">
-          <h2>Bandi e avvisi</h2>
-          <a class="ext" href="#bandi">Tutti i bandi</a>
-        </div>
-        <div class="grid cols-3">
-          <article class="card">
-            <h3>Avviso pubblico MC‑01/2025</h3>
-            <p class="muted">Supporto iniziative sociali — Scadenza 30/09/2025</p>
-          </article>
-          <article class="card">
-            <h3>Bando MC‑Impresa/2025</h3>
-            <p class="muted">Contributi a fondo perduto — Scadenza 15/10/2025</p>
-          </article>
-          <article class="card">
-            <h3>Manifestazione d’interesse</h3>
-            <p class="muted">Elenco operatori economici — Scadenza 31/12/2025</p>
-          </article>
-        </div>
-      </div>
+    <!-- FEED -->
+    <section data-route="feed" aria-label="Feed istituzionale">
+      <article class="card">
+        <h3>Feed</h3>
+        <p class="muted" data-i18n="feed.lead">Aggiornamenti e avvisi alla cittadinanza.</p>
+        <ul class="list" id="feed-list"><!-- filled by JS --></ul>
+      </article>
     </section>
 
-    <!-- Servizi -->
-    <section id="servizi" class="alt">
-      <div class="container">
-        <div class="section-head">
-          <h2>Servizi</h2>
-          <a class="ext" href="#servizi">Catalogo completo</a>
-        </div>
-        <div class="grid cols-4">
-          <a class="card" href="#">
-            <h3>Anagrafe e certificati</h3>
-            <p class="muted">Richiesta certificati, residenza, stato di famiglia.</p>
-          </a>
-          <a class="card" href="#">
-            <h3>Imprese</h3>
-            <p class="muted">Registrazione impresa, SUAP, autorizzazioni.</p>
-          </a>
-          <a class="card" href="#">
-            <h3>Tributi</h3>
-            <p class="muted">Pagamenti, scadenze e agevolazioni.</p>
-          </a>
-          <a class="card" href="#">
-            <h3>Mobilità</h3>
-            <p class="muted">Permessi, ZTL, trasporto pubblico.</p>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Trasparenza / Amministrazione -->
-    <section id="trasparenza">
-      <div class="container">
-        <div class="section-head">
-          <h2>Trasparenza e amministrazione</h2>
-          <a class="ext" href="#trasparenza">Tutti i documenti</a>
-        </div>
-        <div class="grid cols-3">
-          <a class="card" href="#"><h3>Amministrazione trasparente</h3><p class="muted">Atti, dati e documenti.</p></a>
-          <a class="card" href="#"><h3>Giunta e Consiglio</h3><p class="muted">Organi di governo e deleghe.</p></a>
-          <a class="card" href="#"><h3>Albo pretorio</h3><p class="muted">Pubblicazioni ufficiali.</p></a>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <!-- Footer -->
-  <footer role="contentinfo">
-    <div class="container">
-      <div class="foot-grid">
-        <div class="foot">
-          <h4>Metro City</h4>
-          <ul class="list">
-            <li><a class="ext" href="https://metrocity.life" target="_blank" rel="noopener">Sito ufficiale — metrocity.life</a></li>
-            <li><a href="#trasparenza">Amministrazione trasparente</a></li>
-            <li><a href="#servizi">Servizi online</a></li>
-          </ul>
-        </div>
-        <div class="foot">
-          <h4>Argomenti</h4>
-          <ul class="list">
-            <li><a href="#notizie">Notizie</a></li>
-            <li><a href="#comunicati">Comunicati</a></li>
-            <li><a href="#bandi">Bandi e avvisi</a></li>
-          </ul>
-        </div>
-        <div class="foot">
-          <h4>Contatti</h4>
-          <ul class="list">
-            <li><a href="#" aria-disabled="true">Sportelli (presto disponibili)</a></li>
-            <li><a href="#" aria-disabled="true">Assistenza (presto disponibile)</a></li>
-          </ul>
-        </div>
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <strong data-i18n="footer.gov">Governo MetroCity</strong> — <span data-i18n="footer.rights">Tutti i diritti riservati.</span>
       </div>
-      <div class="legal">
-        © <span id="year"></span> Metro City — Portale Istituzionale. Tutti i contenuti sono informativi. Per i dettagli fare riferimento ai documenti ufficiali.
+      <div>
+        <span data-i18n="footer.mainSite">Sito principale:</span> <a href="https://metrocity.life" rel="noopener" target="_blank">metrocity.life</a>
       </div>
     </div>
   </footer>
 
   <script>
-    // Utilità
-    const $ = s => document.querySelector(s);
+    // Simple in-page i18n
+    const I18N = {
+      it: {
+        'site.title':'Governo MetroCity',
+        'site.subtitle':'Presidenza del Consiglio dei Ministri',
+        'nav.home':'Home', 'nav.president':'Presidente', 'nav.government':'Il Governo',
+        'search.placeholder':'Cerca...',
+        'hero.title':'Benvenuti nel portale istituzionale',
+        'hero.lead':'Informazioni ufficiali su Presidenza, Ministeri e attività pubbliche della città.',
+        'home.presidentPreview.title':'Presidente del Consiglio dei Ministri',
+        'home.presidentPreview.lead':'Conosci la visione e le priorità del Presidente del Consiglio, Marco Lorsi.',
+        'home.presidentPreview.text':'Nominato a seguito delle consultazioni, il Presidente guida l\'azione dell\'Esecutivo, coordina i Ministri e rappresenta l\'indirizzo politico generale del Governo.',
+        'home.governmentPreview.title':'Il Governo',
+        'home.governmentPreview.lead':'Ministeri e funzioni principali.',
+        'cta.readMore':'Scopri di più', 'cta.viewAll':'Vedi tutti', 'cta.openFeed':'Apri feed',
+        'president.title':'Presidente del Consiglio dei Ministri',
+        'president.name':'Marco Lorsi',
+        'president.story':'Nato e cresciuto a MetroCity, Marco Lorsi ha maturato esperienza in amministrazione pubblica e coordinamento di progetti strategici per la città. Dopo un periodo di consultazioni con le forze civiche e istituzionali, ha ricevuto l\'incarico di formare il Governo. Le sue priorità includono modernizzazione amministrativa, sicurezza urbana, innovazione sostenibile e dialogo costante con i cittadini.',
+        'president.note':'Questa è una breve biografia di riferimento; le informazioni ufficiali sono pubblicate nei comunicati e nelle note stampa del Consiglio.',
+        'government.title':'Struttura del Governo',
+        'government.lead':'Di seguito i ministeri principali.',
+        'feed.lead':'Aggiornamenti e avvisi alla cittadinanza.',
+        'footer.gov':'Governo MetroCity',
+        'footer.rights':'Tutti i diritti riservati.',
+        'footer.mainSite':'Sito principale:'
+      },
+      en: {
+        'site.title':'MetroCity Government',
+        'site.subtitle':'Office of the Prime Minister',
+        'nav.home':'Home', 'nav.president':'Prime Minister', 'nav.government':'The Cabinet',
+        'search.placeholder':'Search...',
+        'hero.title':'Welcome to the official portal',
+        'hero.lead':'Official information on the Office of the Prime Minister, Ministries, and public activities.',
+        'home.presidentPreview.title':'Prime Minister',
+        'home.presidentPreview.lead':'Learn about the vision and priorities of Prime Minister Marco Lorsi.',
+        'home.presidentPreview.text':'Appointed after consultations, the Prime Minister leads the Executive, coordinates Ministers, and sets the Government\'s general policy direction.',
+        'home.governmentPreview.title':'The Cabinet',
+        'home.governmentPreview.lead':'Main ministries and functions.',
+        'cta.readMore':'Read more', 'cta.viewAll':'View all', 'cta.openFeed':'Open feed',
+        'president.title':'Prime Minister',
+        'president.name':'Marco Lorsi',
+        'president.story':'Born and raised in MetroCity, Marco Lorsi gained experience in public administration and the coordination of strategic projects for the city. After consultations with civic and institutional forces, he was tasked with forming the Government. His priorities include administrative modernization, urban security, sustainable innovation, and ongoing dialogue with citizens.',
+        'president.note':'This is a short reference biography; official details are published in Council press notes.',
+        'government.title':'Government Structure',
+        'government.lead':'Below are the principal ministries.',
+        'feed.lead':'Updates and notices to the public.',
+        'footer.gov':'MetroCity Government',
+        'footer.rights':'All rights reserved.',
+        'footer.mainSite':'Main site:'
+      }
+    };
 
-    // Header: search
-    const openSearch = $('#openSearch');
-    const searchPanel = $('#search-panel');
-    openSearch?.addEventListener('click', () => {
-      const isOpen = searchPanel.classList.toggle('open');
-      openSearch.setAttribute('aria-expanded', String(isOpen));
-      searchPanel.setAttribute('aria-hidden', String(!isOpen));
-      if (isOpen) setTimeout(()=>$('#site-search')?.focus(), 50);
-    });
+    const MINISTERI = [
+      { key:'interno', it:'Ministero dell\'Interno', en:'Ministry of the Interior' },
+      { key:'esteri', it:'Ministero degli Affari Esteri', en:'Ministry of Foreign Affairs' },
+      { key:'mef', it:'Ministero dell\'Economia e delle Finanze', en:'Ministry of Economy and Finance' },
+      { key:'difesa', it:'Ministero della Difesa', en:'Ministry of Defence' },
+      { key:'giustizia', it:'Ministero della Giustizia', en:'Ministry of Justice' },
+      { key:'istruzione', it:'Ministero dell\'Istruzione e del Merito', en:'Ministry of Education and Merit' },
+      { key:'salute', it:'Ministero della Salute', en:'Ministry of Health' },
+      { key:'infrastrutture', it:'Ministero delle Infrastrutture e dei Trasporti', en:'Ministry of Infrastructure and Transport' },
+      { key:'ambiente', it:'Ministero dell\'Ambiente e della Sicurezza Energetica', en:'Ministry for the Environment and Energy Security' }
+    ];
 
-    // Header: mobile menu
-    const openMenu = $('#openMenu');
-    const menuPanel = $('#menu-panel');
-    openMenu?.addEventListener('click', () => {
-      const isOpen = menuPanel.classList.toggle('open');
-      openMenu.setAttribute('aria-expanded', String(isOpen));
-      menuPanel.setAttribute('aria-hidden', String(!isOpen));
-    });
+    const FEED = [
+      { date:'2025-08-02', it:{title:'Apertura Settimana della Mobilità', text:'Presentate nuove linee guida per la viabilità sostenibile.'}, en:{title:'Mobility Week Opening', text:'New guidelines for sustainable mobility presented.'}},
+      { date:'2025-07-24', it:{title:'Avviso di Protezione Civile', text:'Interventi programmati su rete idrica: possibili disservizi.'}, en:{title:'Civil Protection Notice', text:'Scheduled works on water network: possible service interruptions.'}},
+      { date:'2025-07-10', it:{title:'Incontro con le Associazioni', text:'Tavolo di confronto su sicurezza urbana e spazi pubblici.'}, en:{title:'Meeting with Associations', text:'Roundtable on urban safety and public spaces.'}}
+    ];
 
-    // Year
-    $('#year').textContent = new Date().getFullYear();
+    // Safe query helpers (avoid global "$$" name clashes)
+    const $ = (sel, root=document) => root.querySelector(sel);
+    const qsa = (sel, root=document) => Array.from(root.querySelectorAll(sel));
 
-    // Loader per feed JSON (Notizie e Comunicati)
-    async function loadFeed(elId){
-      const container = document.getElementById(elId);
-      if(!container) return;
-      const src = container.getAttribute('data-source');
-      if(!src) return;
-      try{
-        const res = await fetch(src, { cache: 'no-store' });
-        if(!res.ok) return;
-        const items = await res.json(); // [{title, body, dateISO, place, type}]
-        if(!Array.isArray(items) || !items.length) return;
-        container.innerHTML = '';
-        for(const it of items){
-          const article = document.createElement('article');
-          article.className = 'news-item';
-          const date = it.dateISO ? new Date(it.dateISO) : new Date();
-          const dateStr = date.toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'});
-          article.innerHTML = `
-            <strong>${it.title}</strong>
-            <p class="muted">${it.body || ''}</p>
-            <time datetime="${it.dateISO || ''}">${dateStr} · ${it.place || 'Metro City'}</time>
-          `;
-          container.appendChild(article);
-        }
-      }catch(e){/* silenzioso */}
+    const routes = {
+      '': 'home',
+      '/': 'home',
+      '/presidente':'presidente',
+      '/governo':'governo',
+      '/feed':'feed'
+    };
+
+    let lang = 'it';
+
+    function setLang(newLang){
+      lang = newLang;
+      // toggle buttons
+      $('#itBtn').classList.toggle('active', lang==='it');
+      $('#enBtn').classList.toggle('active', lang==='en');
+      $('#itBtn').setAttribute('aria-pressed', lang==='it');
+      $('#enBtn').setAttribute('aria-pressed', lang==='en');
+      // apply translations
+      qsa('[data-i18n]').forEach(el=>{
+        const key = el.getAttribute('data-i18n');
+        const txt = I18N[lang]?.[key];
+        if(typeof txt === 'string') el.textContent = txt;
+      });
+      qsa('[data-i18n-placeholder]').forEach(el=>{
+        const key = el.getAttribute('data-i18n-placeholder');
+        const txt = I18N[lang]?.[key];
+        if(typeof txt === 'string') el.setAttribute('placeholder', txt);
+      });
+      // re-render dynamic blocks (ministries & feed)
+      renderMinistries();
+      renderFeed();
+      renderHomePreviews();
     }
-    loadFeed('news-feed');   // /data/news.json
-    loadFeed('pr-feed');     // /data/press.json
+
+    function renderMinistries(){
+      const container = $('#ministeri-list');
+      if(!container) return;
+      container.innerHTML = '';
+      MINISTERI.forEach(m => {
+        const div = document.createElement('div');
+        div.className='ministero';
+        const title = (lang==='it'?m.it:m.en);
+        div.innerHTML = `<h4>${title}</h4><p class="muted">${lang==='it'?'Titolare:':''} <em>${lang==='it'?'In carica':'Incumbent'}</em></p>`;
+        container.appendChild(div);
+      });
+    }
+
+    function renderHomePreviews(){
+      const preview = $('#gov-preview-list');
+      if(!preview) return;
+      preview.innerHTML = '';
+      MINISTERI.slice(0,4).forEach(m=>{
+        const card = document.createElement('div');
+        card.className='ministero';
+        card.innerHTML = `<h4>${lang==='it'?m.it:m.en}</h4><p class="muted">${lang==='it'?'Sintesi delle competenze.':'Summary of remit.'}</p>`;
+        preview.appendChild(card);
+      });
+
+      const feedBox = $('#feed-preview-list');
+      if(feedBox){
+        feedBox.innerHTML = '';
+        FEED.slice(0,3).forEach(item => {
+          const li = document.createElement('li');
+          const t = lang==='it'?item.it.title:item.en.title;
+          const d = new Date(item.date).toLocaleDateString(lang==='it'?'it-IT':'en-GB');
+          li.innerHTML = `<strong>${d}</strong> — ${t}`;
+          feedBox.appendChild(li);
+        });
+      }
+    }
+
+    function renderFeed(filter=''){
+      const list = $('#feed-list');
+      if(!list) return;
+      list.innerHTML = '';
+      FEED.filter(item=>{
+        const t = (lang==='it'?item.it.title:item.en.title).toLowerCase();
+        const x = (lang==='it'?item.it.text:item.en.text).toLowerCase();
+        return t.includes(filter) || x.includes(filter);
+      }).forEach(item=>{
+        const li = document.createElement('li');
+        const dateStr = new Date(item.date).toLocaleDateString(lang==='it'?'it-IT':'en-GB');
+        const t = lang==='it'?item.it.title:item.en.title;
+        const x = lang==='it'?item.it.text:item.en.text;
+        li.className='card';
+        li.innerHTML = `<div><strong>${dateStr}</strong> — ${t}</div><div class="muted">${x}</div>`;
+        list.appendChild(li);
+      })
+    }
+
+    function setActiveRoute(){
+      const hash = location.hash.replace('#','');
+      const route = routes[hash] || 'home';
+      // Update active section
+      qsa('section[data-route]').forEach(s=>s.classList.remove('active'));
+      $(`section[data-route="${route}"]`)?.classList.add('active');
+      // Update menu active state
+      qsa('a[data-link]').forEach(a=>{
+        const wanted = a.getAttribute('href').replace('#','');
+        a.classList.toggle('active', wanted===hash || (route==='home' && wanted==="#/"));
+      });
+      // Update hero/breadcrumbs
+      const map = {home:'Home', presidente: (lang==='it'?'Presidente':'Prime Minister'), governo:(lang==='it'?'Il Governo':'The Cabinet'), feed:'Feed'};
+      $('#breadcrumbs').textContent = map[route] || 'Home';
+      $('#hero-title').textContent = route==='home' ? (I18N[lang]['hero.title']) : map[route];
+      // Focus main for accessibility
+      $('#app').focus({preventScroll:true});
+    }
+
+    // Search logic (filters current route content where applicable)
+    function performSearch(){
+      const q = $('#q').value.trim().toLowerCase();
+      const route = ($('section.active')?.getAttribute('data-route')) || 'home';
+      if(route==='feed'){
+        renderFeed(q);
+      } else if(route==='governo'){
+        // filter ministries
+        const list = $('#ministeri-list');
+        qsa('.ministero', list).forEach(card=>{
+          const show = card.textContent.toLowerCase().includes(q);
+          card.style.display = show? 'block' : 'none';
+        })
+      } else {
+        // on home, filter both previews
+        const homeCards = ['#home-pres-preview', '#home-gov-preview', '#home-feed-preview'].map(sel=>$(sel));
+        homeCards.forEach(card=>{
+          if(!card) return;
+          card.style.display = q? (card.textContent.toLowerCase().includes(q) ? 'block':'none') : 'block';
+        })
+      }
+    }
+
+    // --- Minimal Self Tests (run in console) ---
+    function runSelfTests(){
+      const results = [];
+      try {
+        // helper existence
+        results.push({name:'qsa helper exists', pass: typeof qsa === 'function'});
+        results.push({name:'$ helper exists', pass: typeof $ === 'function'});
+        // i18n switch applies title & placeholder
+        const prevTitle = $('#site-title').textContent;
+        setLang('en');
+        const enOK = $('#site-title').textContent === I18N.en['site.title'] && $('#q').getAttribute('placeholder') === I18N.en['search.placeholder'];
+        setLang('it');
+        const itOK = $('#site-title').textContent === I18N.it['site.title'] && $('#q').getAttribute('placeholder') === I18N.it['search.placeholder'];
+        results.push({name:'Language switch updates UI', pass: enOK && itOK});
+        // routing
+        const oldHash = location.hash;
+        location.hash = '#/governo';
+        setActiveRoute();
+        const govActive = document.querySelector('section[data-route="governo"]').classList.contains('active');
+        location.hash = oldHash || '#/';
+        setActiveRoute();
+        results.push({name:'Routing activates correct section', pass: govActive});
+        // search does not throw
+        $('#q').value = 'health';
+        performSearch();
+        results.push({name:'Search executes', pass: true});
+      } catch (e) {
+        results.push({name:'Unexpected error during tests', pass:false, error: String(e)});
+      }
+      console.table(results);
+      return results.every(r=>r.pass);
+    }
+
+    // Init
+    window.addEventListener('hashchange', setActiveRoute);
+    document.addEventListener('DOMContentLoaded', () => {
+      // wire language switch
+      $('#itBtn').addEventListener('click', ()=> setLang('it'));
+      $('#enBtn').addEventListener('click', ()=> setLang('en'));
+      // search
+      $('#searchBtn').addEventListener('click', performSearch);
+      $('#q').addEventListener('keydown', (e)=>{ if(e.key==='Enter') performSearch();});
+      // first render
+      setLang('it');
+      renderMinistries();
+      renderHomePreviews();
+      renderFeed();
+      setActiveRoute();
+      // run minimal tests (see console)
+      setTimeout(runSelfTests, 0);
+    });
   </script>
 </body>
 </html>
